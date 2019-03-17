@@ -10,6 +10,13 @@ namespace GraMonolitycznie
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Hello World!");
+
+            Console.Write("Podaj swoje imię: ");
+
+            string imie = Console.ReadLine();
+
+            Console.WriteLine($"Witaj, {imie}");
         }
     }
 }
