@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GraMonolitycznie
+namespace GraProceduralnie
 {
     class Program
     {
@@ -20,12 +20,12 @@ namespace GraMonolitycznie
             return generator.Next(min, max+1);;   
         }
 
-        static int WczytajLiczbe()
+        static int WczytajLiczbe(string prompt = "Podaj liczbę. (X aby zakończyć): ")
             {
                 int liczba = 0;
                 while(true)
                 {
-                    Console.Write("Podaj liczbę: ");
+                    Console.Write(prompt);
                     string tekst = Console.ReadLine();
                     if (tekst.ToLower() == "x")
                         throw OperationCanceledException("wybrano X");
@@ -50,18 +50,23 @@ namespace GraMonolitycznie
                 return liczba;
             }           
 
+        static string Ocena(int propozycja)
+            {
+                if (propozycja < wylosowana)
+                    return "za mało";
+                else if (propozycja > wylosowana)
+                    return "za dużo";
+                else
+                    return "trafiono";
+            }
+
+        static int wylosowana;
+
         static void Main(string[] args)
         {
-            /*
-            Console.WriteLine("Witaj!");
-            Console.Write("Podaj swoje imię: ");
-            string x = Console.ReadLine();
-            Console.WriteLine($"Witaj, {x}");
-            */
-
             // Krok 1. Komputer losuje liczbę
             
-            int wylosowana = Losuj(1,100);
+            wylosowana = Losuj(1,100);
             Console.WriteLine("Wylosowałem liczbę od 1 do 100. \n Odgadnij ją");
 
 #if(DEBUG)
@@ -72,45 +77,15 @@ namespace GraMonolitycznie
             bool trafiono = false; //wartownik (zwany czasami flagą)
             do
             {
-                #region Krok 2. Człowiek proponuje rozwiązanie
-                Console.Write("Podaj swoją propozycję: ");
-                string tekst = Console.ReadLine();
-                if (tekst.ToLower() == "x")
-                    break;
-
-                int propozycja = 0;
-                try
-                {
-                    propozycja = Convert.ToInt32(tekst);
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Nie podano liczby!");
-                    continue;
-                }
-                catch (OverflowException)
-                {
-                    Console.WriteLine("Liczba nie mieści się w rejestrze!");
-                    continue;
-                }
-
+                int propozycja = WczytajLiczbe("Podaj swoją propozycje. (X aby się poddać)");
                 Console.WriteLine($"Przyjąłem wartość {propozycja}");
-                #endregion
 
-
-                #region Krok 3. Komputer ocenia propozycję
-                if (propozycja < wylosowana)
-                    Console.WriteLine("za mało");
-                else if (propozycja > wylosowana)
-                    Console.WriteLine("za dużo");
-                else
-                {
-                    Console.WriteLine("trafiono");
-                    trafiono = true;
-                }
-                #endregion
+                string wynik = Ocena(propozycja);
+                Console.WriteLine(wynik);
+                if(wynik == "trafiono")
+                    break;
             }
-            while (!trafiono);
+            while (true);
             //do momentu trafienia
 
             Console.WriteLine("Koniec gry");
