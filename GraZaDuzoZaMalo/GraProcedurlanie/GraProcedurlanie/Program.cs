@@ -10,10 +10,45 @@ namespace GraMonolitycznie
     {
         static int Losuj(int min, int max)
         {
+            if(min > max)
+                { //swap
+                    int temp = min;
+                    min = max;
+                    max = temp;
+                }
             Random generator = new Random();
             return generator.Next(min, max+1);;   
         }
 
+        static int WczytajLiczbe()
+            {
+                int liczba = 0;
+                while(true)
+                {
+                    Console.Write("Podaj liczbę: ");
+                    string tekst = Console.ReadLine();
+                    if (tekst.ToLower() == "x")
+                        throw OperationCanceledException("wybrano X");
+
+                
+                    try
+                    {
+                        liczba = Convert.ToInt32(tekst);
+                        break;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Nie podano liczby! Spróbuj jeszcze raz.");
+                        continue;
+                    }
+                    catch (OverflowException)
+                    {
+                        Console.WriteLine("Liczba nie mieści się w rejestrze! Spróbuj jeszcze raz.");
+                        continue;
+                    }
+                }
+                return liczba;
+            }           
 
         static void Main(string[] args)
         {
@@ -24,9 +59,9 @@ namespace GraMonolitycznie
             Console.WriteLine($"Witaj, {x}");
             */
 
-            // 1. Komputer losuje liczbę
-            Random generator = new Random();
-            int wylosowana = generator.Next(1, 101);
+            // Krok 1. Komputer losuje liczbę
+            
+            int wylosowana = Losuj(1,100);
             Console.WriteLine("Wylosowałem liczbę od 1 do 100. \n Odgadnij ją");
 
 #if(DEBUG)
