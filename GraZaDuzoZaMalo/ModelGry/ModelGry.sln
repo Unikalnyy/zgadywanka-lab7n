@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelGry", "ModelGry\ModelGry.csproj", "{D3C92AB0-09BB-4108-8766-2260ED500131}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUnitProjectModelGry", "TestUnitProjectModelGry\TestUnitProjectModelGry.csproj", "{6E3F9661-C518-4BAF-BEFF-C971D6BD564A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D3C92AB0-09BB-4108-8766-2260ED500131} = {D3C92AB0-09BB-4108-8766-2260ED500131}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
