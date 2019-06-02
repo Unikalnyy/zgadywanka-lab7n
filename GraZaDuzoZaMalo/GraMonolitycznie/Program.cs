@@ -68,7 +68,7 @@ namespace GraMonolitycznie
                 }
                 #endregion
             }
-            while( !trafiono );
+            while (!trafiono);
             //do momentu trafienia
 
             Console.WriteLine("Koniec gry");
