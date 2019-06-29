@@ -117,7 +117,7 @@ namespace GraGUI
             }
         }
 
-        // przycisk - poddaj się
+        // przycisk poddaj się
         private void buttonpoddaj(object sender, EventArgs e)
         {
             g.Poddaj();
@@ -135,7 +135,7 @@ namespace GraGUI
             f2.Show();
         }
 
-        // timer (działa na nim stoper)
+        // timer, dzieki ktoremu stoper funkcjonuje
         private void timer1_Tick(object sender, EventArgs e)
         {
             czaslabel.Text = string.Format("{0:00}:{1:00}:{2:00}", stoper.Elapsed.Hours, stoper.Elapsed.Minutes, stoper.Elapsed.Seconds);
